@@ -1,10 +1,11 @@
 package com.couchbros.crimenet
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -13,6 +14,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        main_edit_profile.setOnClickListener { onEditProfile() }
     }
 
     override fun onStart() {
@@ -29,6 +32,11 @@ class MainActivity : AppCompatActivity() {
         val uidTextView = findViewById(R.id.uid) as TextView
 
         uidTextView.text = currentUser.uid
+    }
+
+    private fun onEditProfile() {
+        val intent = Intent(this, EditProfileActivity::class.java)
+        startActivity(intent)
     }
 
 }

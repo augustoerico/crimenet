@@ -38,6 +38,15 @@
 
         </LinearLayout>
 
+        <Button
+            android:id="@+id/main_edit_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit profile"
+            android:layout_gravity="center"
+            style="@style/Base.Widget.AppCompat.Button.Colored"
+            android:textColor="#ffffff"/>
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
