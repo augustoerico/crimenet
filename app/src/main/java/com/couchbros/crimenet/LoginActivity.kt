@@ -17,6 +17,7 @@ class LoginActivity : AppCompatActivity() {
 
     private var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
     private var mCallbackManager: CallbackManager = CallbackManager.Factory.create()
+    private var that = this
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,6 +68,11 @@ class LoginActivity : AppCompatActivity() {
                                 Log.d("login", "... is successful")
                                 val result = authResult.result
                                 val user = result.user
+
+                                Log.d("login", "user: $user")
+
+                                val intent: Intent = Intent(that, MainActivity::class.java)
+                                startActivity(intent)
                             } else {
                                 Log.e("login", "Error on complete listener",
                                         authResult.exception)
