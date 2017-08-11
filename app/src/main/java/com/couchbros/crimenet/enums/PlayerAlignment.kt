@@ -7,20 +7,29 @@ enum class PlayerAlignment(lawChaosAxis: Int, goodEvilAxis: Int) {
     CHAOTIC_GOOD(2, 0), CHAOTIC_NEUTRAL(2, 1), CHAOTIC_EVIL(2, 2);
 
     companion object Factory {
-        fun create(lawChaosAxis: Int, goodEvilAxis: Int): PlayerAlignment {
+        fun fromValues(lawChaosAxis: Int, goodEvilAxis: Int): PlayerAlignment {
 
-            if (lawChaosAxis == 0 && goodEvilAxis == 0) return LAWFUL_GOOD
-            else if (lawChaosAxis == 0 && goodEvilAxis == 1) return LAWFUL_NEUTRAL
-            else if (lawChaosAxis == 0 && goodEvilAxis == 2) return LAWFUL_EVIL
+            var alignment = TRUE_NEUTRAL
 
-            else if (lawChaosAxis == 1 && goodEvilAxis == 0) return NEUTRAL_GOOD
-            else if (lawChaosAxis == 1 && goodEvilAxis == 2) return NEUTRAL_EVIL
+            when (lawChaosAxis)  {
+                0 -> when (goodEvilAxis) {
+                    0 -> alignment = LAWFUL_GOOD
+                    1 -> alignment = LAWFUL_NEUTRAL
+                    2 -> alignment = LAWFUL_EVIL
+                }
+                1 -> when (goodEvilAxis) {
+                    0 -> alignment = NEUTRAL_GOOD
+                    1 -> alignment = TRUE_NEUTRAL
+                    2 -> alignment = NEUTRAL_EVIL
+                }
+                2 -> when (goodEvilAxis) {
+                    0 -> alignment = CHAOTIC_GOOD
+                    1 -> alignment = CHAOTIC_NEUTRAL
+                    2 -> alignment = CHAOTIC_EVIL
+                }
+            }
 
-            else if (lawChaosAxis == 2 && goodEvilAxis == 0) return CHAOTIC_GOOD
-            else if (lawChaosAxis == 2 && goodEvilAxis == 1) return CHAOTIC_NEUTRAL
-            else if (lawChaosAxis == 2 && goodEvilAxis == 2) return CHAOTIC_EVIL
-
-            return TRUE_NEUTRAL
+            return alignment
         }
     }
 }

@@ -41,7 +41,7 @@ class EditProfileActivity : AppCompatActivity() {
         val intent = Intent(this, MainActivity::class.java)
 
         val profile = mDatabase.child("users/$uid/profile")
-        val alignment = PlayerAlignment.create(edit_profile_good_evil.progress,
+        val alignment = PlayerAlignment.fromValues(edit_profile_law_chaos.progress,
                 edit_profile_good_evil.progress)
 
         profile.updateChildren(mapOf(
