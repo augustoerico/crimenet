@@ -21,6 +21,8 @@ class EditProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_profile)
         setSupportActionBar(toolbar)
+
+        edit_profile_nickname.nextFocusDownId = R.id.edit_profile_platform
     }
 
     override fun onStart() {
