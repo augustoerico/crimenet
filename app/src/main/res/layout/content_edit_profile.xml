@@ -13,11 +13,81 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <LinearLayout
+        <android.support.design.widget.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginBottom="0dp"
+            android:hint="Account ID"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+
+        <RadioGroup
+            android:id="@+id/edit_profile_platform"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="24dp">
+            android:layout_marginRight="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_gravity="center">
+
+            <RadioButton
+                android:id="@+id/edit_profile_pc"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:button="@null"
+                android:layout_weight="1"
+                android:paddingTop="16dp"
+                android:drawableTop="@mipmap/ic_pc"
+                android:background="@drawable/checkbox_background" />
+
+            <RadioButton
+                android:id="@+id/edit_profile_ps3"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:button="@null"
+                android:layout_weight="1"
+                android:paddingTop="16dp"
+                android:drawableTop="@mipmap/ic_ps3"
+                android:background="@drawable/checkbox_background" />
+
+            <RadioButton
+                android:id="@+id/edit_profile_ps4"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:button="@null"
+                android:layout_weight="1"
+                android:paddingTop="16dp"
+                android:drawableTop="@mipmap/ic_ps4"
+                android:background="@drawable/checkbox_background" />
+
+            <RadioButton
+                android:id="@+id/edit_profile_xbox360"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:button="@null"
+                android:drawableTop="@mipmap/ic_xbox360"
+                android:layout_weight="1"
+                android:paddingTop="16dp"
+                android:background="@drawable/checkbox_background" />
+
+            <RadioButton
+                android:id="@+id/edit_profile_xboxone"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:button="@null"
+                android:drawableTop="@mipmap/ic_xboxone"
+                android:layout_weight="1"
+                android:paddingTop="16dp"
+                android:background="@drawable/checkbox_background" />
+
+        </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
             
             <TextView
                 android:layout_width="0px"
