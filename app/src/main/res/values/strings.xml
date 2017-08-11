@@ -3,4 +3,10 @@
     <string name="facebook_application_id" translatable="false">128688897749315</string>
     <string name="facebook_login_protocol_scheme" translatable="false">fb128688897749315</string>
     <string name="title_activity_edit_profile">EditProfileActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 </resources>
