@@ -1,20 +1,22 @@
 package com.couchbros.crimenet.enums
 
-enum class Platform(value: Int) {
+import com.couchbros.crimenet.R
 
-    PC(0), PS3(1), PS4(2), XBOX_360(3), XBOX_ONE(4);
+enum class Platform {
+
+    PC, PS3, PS4, XBOX_360, XBOX_ONE;
 
     companion object Factory {
-        fun fromValue(value: Int): Platform {
+        fun fromId(value: Int): Platform {
 
             var platform = PC
 
             when (value) {
-                0 -> platform = PC
-                1 -> platform = PS3
-                2 -> platform = PS4
-                3 -> platform = XBOX_360
-                4 -> platform = XBOX_ONE
+                R.id.edit_profile_pc -> platform = PC
+                R.id.edit_profile_ps3 -> platform = PS3
+                R.id.edit_profile_ps4 -> platform = PS4
+                R.id.edit_profile_xbox360 -> platform = XBOX_360
+                R.id.edit_profile_xboxone -> platform = XBOX_ONE
             }
 
             return platform

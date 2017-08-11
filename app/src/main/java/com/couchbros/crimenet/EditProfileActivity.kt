@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.couchbros.crimenet.enums.Platform
 import com.couchbros.crimenet.enums.PlayerAlignment
@@ -42,13 +41,21 @@ class EditProfileActivity : AppCompatActivity() {
         val intent = Intent(this, MainActivity::class.java)
 
         val profile = mDatabase.child("users/$uid/profile")
+
+        val nickname = edit_profile_nickname.text.toString()
         val alignment = PlayerAlignment.fromValues(edit_profile_law_chaos.progress,
-                edit_profile_good_evil.progress)
+                    edit_profile_good_evil.progress).toString()
+        val platform = Platform.fromId(edit_profile_platform.checkedRadioButtonId).toString()
+
+        if (nickname.isNullOrEmpty() || nickname.isBlank()) {
+            edit_profile_nickname.error = "Field required"
+            return
+        }
 
         profile.updateChildren(mapOf(
-                "alignment" to alignment.toString(),
-                "platform" to Platform.PS4.toString(),
-                "nickname" to "KikoDSV"
+                "alignment" to alignment,
+                "platform" to platform,
+                "nickname" to nickname
         ))
                 .addOnCompleteListener {
                     Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT).show()
@@ -60,7 +67,6 @@ class EditProfileActivity : AppCompatActivity() {
                     Log.e("profile_update", message, it)
                     startActivity(intent)
                 }
-
     }
 
     private fun onDiscard(uid: String) {
