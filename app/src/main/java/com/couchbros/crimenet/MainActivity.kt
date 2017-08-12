@@ -36,6 +36,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         nav_view.setNavigationItemSelectedListener(this)
     }
 
+    override fun onStart() {
+        super.onStart()
+
+        val currentUser = mAuth.currentUser
+        if (currentUser == null) {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            return
+        }
+
+    }
+
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
@@ -64,9 +76,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_edit_profile -> {
-                // Handle the camera action
-                val intent = Intent(this, EditProfileActivity::class.java)
-                startActivity(intent)
+                val fragment = EditProfileFragment()
+                fragmentManager.beginTransaction().replace(R.id.content_main, fragment)
+                        .commit()
             }
             R.id.nav_history -> {
                 Toast.makeText(this, "History!", Toast.LENGTH_SHORT).show()
