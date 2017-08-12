@@ -32,7 +32,7 @@ class EditProfileFragment : Fragment() {
 
         if (mAuth.currentUser == null) {
             container?.removeView(view)
-            val intent = Intent(this.activity, LoginActivity::class.java)
+            val intent = Intent(activity, LoginActivity::class.java)
             startActivity(intent)
         }
 
