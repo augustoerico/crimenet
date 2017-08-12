@@ -21,5 +21,19 @@ enum class Platform {
 
             return platform
         }
+
+        fun idFromString(value: String): Int {
+
+            var id = R.id.edit_profile_pc
+
+            when (value.trim().toUpperCase()) {
+                "PS3" -> id = R.id.edit_profile_ps3
+                "PS4" -> id = R.id.edit_profile_ps4
+                "XBOX_360" -> id = R.id.edit_profile_xbox360
+                "XBOX_ONE" -> id = R.id.edit_profile_xboxone
+            }
+
+            return id
+        }
     }
 }

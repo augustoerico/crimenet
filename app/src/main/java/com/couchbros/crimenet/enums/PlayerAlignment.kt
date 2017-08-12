@@ -1,10 +1,10 @@
 package com.couchbros.crimenet.enums
 
-enum class PlayerAlignment(lawChaosAxis: Int, goodEvilAxis: Int) {
+enum class PlayerAlignment {
 
-    LAWFUL_GOOD(0, 0), LAWFUL_NEUTRAL(0, 1), LAWFUL_EVIL(0, 2),
-    NEUTRAL_GOOD(1, 0), TRUE_NEUTRAL(1, 1), NEUTRAL_EVIL(0, 2),
-    CHAOTIC_GOOD(2, 0), CHAOTIC_NEUTRAL(2, 1), CHAOTIC_EVIL(2, 2);
+    LAWFUL_GOOD, LAWFUL_NEUTRAL, LAWFUL_EVIL,
+    NEUTRAL_GOOD, TRUE_NEUTRAL, NEUTRAL_EVIL,
+    CHAOTIC_GOOD, CHAOTIC_NEUTRAL, CHAOTIC_EVIL;
 
     companion object Factory {
         fun fromValues(lawChaosAxis: Int, goodEvilAxis: Int): PlayerAlignment {
@@ -30,6 +30,27 @@ enum class PlayerAlignment(lawChaosAxis: Int, goodEvilAxis: Int) {
             }
 
             return alignment
+        }
+
+        fun axisValues(alignment: PlayerAlignment): Pair<Int, Int> {
+
+            var values = Pair(1, 1)
+
+            when (alignment) {
+                LAWFUL_GOOD -> values = Pair(0, 0)
+                LAWFUL_NEUTRAL -> values = Pair(0, 1)
+                LAWFUL_EVIL -> values = Pair(0, 2)
+
+                NEUTRAL_GOOD -> values = Pair(1, 0)
+                TRUE_NEUTRAL -> values = Pair(1, 1)
+                NEUTRAL_EVIL -> values = Pair(1, 2)
+
+                CHAOTIC_GOOD -> values = Pair(2, 0)
+                CHAOTIC_NEUTRAL -> values = Pair(2, 1)
+                CHAOTIC_EVIL -> values = Pair(2, 2)
+            }
+
+            return values
         }
     }
 }
