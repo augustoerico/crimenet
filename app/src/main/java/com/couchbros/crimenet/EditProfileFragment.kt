@@ -7,11 +7,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.*
 import com.couchbros.crimenet.enums.Platform
 import com.couchbros.crimenet.enums.PlayerAlignment
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.fragment_edit_profile.*
 
 class EditProfileFragment : Fragment() {
@@ -20,6 +23,17 @@ class EditProfileFragment : Fragment() {
     val mDatabase = FirebaseDatabase.getInstance().reference
 
     private var container: ViewGroup? = null
+    private var profile: Profile = Profile()
+
+    private val that = this
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val uid = mAuth.currentUser!!.uid
+        val profileRef = mDatabase.child("users/$uid/profile")
+        profileRef?.addListenerForSingleValueEvent(ValueEventListenerImpl())
+    }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -34,10 +48,23 @@ class EditProfileFragment : Fragment() {
             container?.removeView(view)
             val intent = Intent(activity, LoginActivity::class.java)
             startActivity(intent)
+            return
         }
 
+        // Set listeners
         edit_profile_discard.setOnClickListener { onDiscard() }
         edit_profile_save.setOnClickListener { onSave() }
+
+        // Load data from model
+        val alignment = PlayerAlignment.axisValues(enumValueOf<PlayerAlignment>(profile.alignment))
+        val lawChaosAxis = alignment.first
+        val goodEvilAxis = alignment.second
+
+        (edit_profile_nickname as TextView).text = profile.nickname
+        (edit_profile_law_chaos as SeekBar).progress = lawChaosAxis
+        (edit_profile_good_evil as SeekBar).progress = goodEvilAxis
+        (edit_profile_platform as RadioGroup).check(Platform.idFromString(profile.platform))
+
     }
 
     private fun onSave() {
@@ -74,4 +101,20 @@ class EditProfileFragment : Fragment() {
     private fun onDiscard() {
         container?.removeView(view)
     }
+
+    inner class ValueEventListenerImpl : ValueEventListener {
+
+        override fun onCancelled(e: DatabaseError?) {
+            val message = e.toString()
+            Log.e("profile", message, Exception(message))
+            Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
+        }
+
+        override fun onDataChange(snapshot: DataSnapshot?) {
+            profile = snapshot?.getValue(Profile::class.java) as Profile
+
+            that.onStart()
+        }
+    }
+
 }
