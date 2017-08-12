@@ -1,6 +1,7 @@
 package com.couchbros.crimenet
 
 import android.app.Fragment
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -28,6 +29,12 @@ class EditProfileFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
+        if (mAuth.currentUser == null) {
+            container?.removeView(view)
+            val intent = Intent(this.activity, LoginActivity::class.java)
+            startActivity(intent)
+        }
 
         edit_profile_discard.setOnClickListener { onDiscard() }
         edit_profile_save.setOnClickListener { onSave() }
